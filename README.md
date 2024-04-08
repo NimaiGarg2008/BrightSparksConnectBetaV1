@@ -1,1 +1,0 @@
-# BrightSparksConnectBetaV1
