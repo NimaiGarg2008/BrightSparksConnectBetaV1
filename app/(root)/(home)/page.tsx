@@ -2,11 +2,18 @@ import React from 'react'
 import MeetingTypeList from '@/components/MeetingTypeList'
 
 const Home = () => {
-  const now = new Date();
+  const now = new Date(); // Current date and time for the standard timezone
 
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
+  // Get the user's timezone offset in minutes
+  const timezoneOffset = new Date().getTimezoneOffset();
 
+  // Calculate the user's local date and time by adding the timezone offset
+  const userNow = new Date(now.getTime() - (timezoneOffset * 60000));
+
+  // Format the user's local date and time
+  const time = userNow.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(userNow);
+  
   return (
     <section className="flex size-full flex-col gap-10 text-white">
         <div className="h-[300px] w-full rounded-[20px] bg-hero bg-cover">
